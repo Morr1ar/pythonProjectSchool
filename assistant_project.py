@@ -29,6 +29,8 @@ class Assistant:
         self.r = sr.Recognizer()  # Инициализация распознавателя
         self.text = ''  # Создание глобальной переменной text
 
+        self.st = False # Переменная состояния запуска
+
         self.num_task = 0
         self.j = 0
         self.ans = ''
@@ -491,8 +493,10 @@ class Assistant:
         self.talk(choice(['Надеюсь мы скоро увидимся', 'Рада была помочь', 'Пока пока', 'Я отключаюсь']))
         self.engine.stop()
         system('cls')
-        self.active = False
-        #sys.exit(0)
+        #self.active = False
+        self.st = False
+        print(self.st)
+        sys.exit(0)
 
     def shut(self):     # метод выключения компьютера по команде с подтверждением
         text = self.listen("Подтвердите действие!")
@@ -561,10 +565,11 @@ class Assistant:
     def start(self):  # функция старт
         self.cfile()
         self.del_reminder_init()
-        self.parse_bookmarks()
-        self.active = True
+        #self.parse_bookmarks()
+        #self.active = True
+        self.st = True
         self.talk("Голосовой помощник запущен!")
-        while self.active:
+        while self.st:
             Assistant().recognizer()
 
     #def start(self):    # функция старт

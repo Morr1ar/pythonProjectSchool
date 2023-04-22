@@ -23,23 +23,29 @@ class MainWidget(FloatLayout):
     btn_finish = ObjectProperty()
     scroll = ObjectProperty()
     win_size = 100
+    assistant = Assistant()
     start = False
 
     stop = threading.Event()
 
-    def start_second_thread(self, l_text):
+    def start_second_thread(self):
         threading.Thread(target=self.on_press_button_start).start()
 
     def on_press_button_start(self):
         filename = 'instruction2.txt'
         self.text_label.text = text_wrap(filename, window_size=self.win_size)
-
-        if not self.start:
-            threading.Thread(target=self.infinite_loop).start()
+        print(self.assistant.st)
+        if not self.assistant.st or self.start == False:
+            print(self.assistant.st)
             self.start = True
+            threading.Thread(target=self.infinite_loop).start()
 
     @mainthread
     def on_press_button_finish(self):
+        if self.assistant.st == True or self.start == True:
+            self.assistant.quite()
+            self.assistant.st = False
+            self.start = False
         sys.exit(0)
 
     @mainthread
@@ -72,14 +78,11 @@ class MainWidget(FloatLayout):
         self.text_label.text = text_wrap(filename, window_size=self.win_size)
 
     def infinite_loop(self):
-        Assistant().start()
+        self.assistant.start()
 
 
 class MainApp(App):
     def on_stop(self):
-        # The Kivy event loop is about to stop, set a stop signal;
-        # otherwise the app window will close, but the Python process will
-        # keep running until all secondary threads exit.
         self.root.stop.set()
 
     def build(self):
