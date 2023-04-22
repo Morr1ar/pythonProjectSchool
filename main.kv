@@ -1,0 +1,84 @@
+<MainWidget>:
+    text_label: text
+    btn_start: start
+    btn_reminder: reminder
+    btn_contacts: contacts
+    btn_instruction: instruction
+    btn_finish: finish
+    padding: (0, 0)
+
+    Button:
+        id: start
+        text: 'Старт'
+        background_color: [0,0,1,1]
+        font_size: 28
+        size_hint: (.4, .166)
+        pos_hint: {'x':0, 'y':0.830}
+        on_press: root.on_press_button_start()
+
+    Button:
+        id: reminder
+        text: 'Заметки'
+        background_color: [0,0,1,1]
+        font_size: 28
+        size_hint: (.4, .166)
+        pos_hint: {'x':0, 'y':.664}
+        on_press: root.on_press_button_reminder()
+
+    Button:
+        id: contacts
+        text: 'Телефонная книжка'
+        background_color: [0,0,1,1]
+        font_size: 28
+        size_hint: (.4, .166)
+        pos_hint: {'x':0, 'y':.498}
+        on_press: root.on_press_button_contacts()
+
+    Button:
+        id: recipes
+        text: 'Рецепты'
+        background_color: [0,0,1,1]
+        font_size: 28
+        size_hint: (.4, .166)
+        pos_hint: {'x':0, 'y':.332}
+        on_press: root.on_press_button_recipes()
+
+    Button:
+        id: instruction
+        text: 'Инструкция'
+        background_color: [0,0,1,1]
+        font_size: 28
+        size_hint: (.4, .166)
+        pos_hint: {'x':0, 'y':.166}
+        on_press: root.on_press_button_instruction()
+
+    Button:
+        id: finish
+        text: 'Выход'
+        background_color: [0,0,1,1]
+        font_size: 28
+        size_hint: (.4, .166)
+        pos_hint: {'x':0, 'y':0}
+        on_press: root.on_press_button_finish()
+
+    ScrollView:
+        id: scroll
+        pos_hint: {'x':0.5, 'y':0}
+        do_scroll_x: False
+        do_scroll_y: True
+        bar_width: 20
+        scroll_timeout: 100
+        scroll_type: ['bars','content']
+
+        Label:
+            id: text
+            pos_hint: {'x':0, 'y':0.1}
+            size_hint: (0.4,3.90)
+            height: self.texture_size[1]
+            valign: 'top'
+            halign: 'center'
+            background_color: [1,1,1,1]
+            font_size: 20
+            text: 'Вас приветствует помощник'
+            padding: (0, 30)
+            text_size: (self.width, 3000)
